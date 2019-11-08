@@ -2,16 +2,16 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 18:55:41
-@LastEditTime: 2019-11-07 11:01:26
+@LastEditTime: 2019-11-08 17:05:36
 @Description:
 '''
 
-from Ui.Ui_DialogCardEdit import Ui_DialogCardEdit
+from Ui.CardEdit.Ui_DialogCardEdit import Ui_DialogCardEdit
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
 from cardClass import readCardClasses, readCardClass, CardClass
-from Ui.Ui_DialogCardEditDetail_Window import DialogCardEditDetail_Window
+from Ui.CardEdit.Ui_DialogCardEditDetail_Window import DialogCardEditDetail_Window
 
 
 class DialogCardEdit_Window(QtWidgets.QDialog):
@@ -24,6 +24,7 @@ class DialogCardEdit_Window(QtWidgets.QDialog):
         self.ui.pushButtonEdit.clicked.connect(self.buttonEditClicked)
         self.ui.pushButtonCancel.clicked.connect(self.close)
         self.ui.pushButtonAddNew.clicked.connect(self.buttonAddNewClicked)
+        self.ui.tableView.doubleClicked.connect(self.buttonEditClicked)
 
     def setTableView(self):
         cardClasses = readCardClasses()
@@ -41,6 +42,8 @@ class DialogCardEdit_Window(QtWidgets.QDialog):
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.horizontalHeader().setSectionResizeMode(
             QtWidgets.QHeaderView.Stretch)
+        self.ui.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.ui.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
     def buttonEditClicked(self):
         selectCardClassNum = self.model.data(

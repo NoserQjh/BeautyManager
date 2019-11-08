@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 18:55:41
-@LastEditTime: 2019-11-05 22:22:57
+@LastEditTime: 2019-11-08 16:08:29
 @Description:
 '''
 
@@ -10,7 +10,7 @@ from Ui.Ui_MainWindowIndex import Ui_Index
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-from Ui.Ui_DialogCardEdit_Window import DialogCardEdit_Window
+from Ui.CardEdit.Ui_DialogCardEdit_Window import DialogCardEdit_Window
 
 class MainWindowIndex_window(QtWidgets.QMainWindow):
     def __init__(self):

@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-04 22:15:52
-@LastEditTime: 2019-11-07 11:13:03
+@LastEditTime: 2019-11-08 16:01:25
 @strategyDescription:
 '''
 
@@ -19,7 +19,7 @@ def fullReduction(member, card, product, cost, strategyParams):
 
 strategyNum2Func = {0: discount, 1: fullReduction}
 strategyNum2Name = {0: '折扣', 1: '满减'}
-strategyNum2Description = {0: '', 1: ''}
+strategyNum2Params = {0: ['折扣比例'], 1: ['满','减']}
 
 
 class Strategy():
@@ -27,11 +27,9 @@ class Strategy():
             self,
             strategyNum,
             strategyParams,
-            strategyDescription='',
     ):
         self.strategyNum = strategyNum
         self.strategyParams = strategyParams
-        self.strategyDescription = strategyDescription
 
     def calculateCost(self, member, card, product, cost):
         return strategyNum2Func.get(self.strategyNum)(member, card, cost,
