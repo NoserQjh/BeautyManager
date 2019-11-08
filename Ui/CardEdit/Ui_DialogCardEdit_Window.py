@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 18:55:41
-@LastEditTime: 2019-11-08 17:05:36
+@LastEditTime: 2019-11-08 17:22:47
 @Description:
 '''
 
@@ -10,7 +10,7 @@ from Ui.CardEdit.Ui_DialogCardEdit import Ui_DialogCardEdit
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-from cardClass import readCardClasses, readCardClass, CardClass
+from Class.cardClass import readCardClasses, readCardClass, CardClass
 from Ui.CardEdit.Ui_DialogCardEditDetail_Window import DialogCardEditDetail_Window
 
 

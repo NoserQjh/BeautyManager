@@ -2,13 +2,34 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 17:42:39
-@LastEditTime: 2019-11-05 18:19:21
+@LastEditTime: 2019-11-08 17:21:21
 @Description:
 '''
 
 import os
 import json
 import time
+
+
+def writeMemberIndex(cardClassIndex):
+    with open(
+            './Data/Index/MemberIndex.json', 'w', encoding='utf-8') as outfile:
+        json.dump(cardClassIndex, outfile)
+
+
+def readMemberIndex():
+    with open(
+            './Data/Index/MemberIndex.json', 'r', encoding='utf-8') as infile:
+        return json.load(infile)
+
+
+def getNewMemberNum():
+    memberIndex = readMemberIndex()
+
+    numList = []
+    for memberNum in memberIndex.keys():
+        numList.append(int(memberNum))
+    return max(numList) + 1
 
 
 def nowTime():
@@ -24,11 +45,11 @@ def nowTime():
 
 class Member():
     def __init__(self,
-                 memberNum,
-                 name,
-                 gender,
-                 phoneNumber,
-                 birthday,
+                 memberNum=getNewMemberNum(),
+                 name='',
+                 gender='',
+                 phoneNumber='',
+                 birthday=[0, 0, 0],
                  createTime=nowTime(),
                  consumptionRecord=[]):
         self.memberNum = memberNum

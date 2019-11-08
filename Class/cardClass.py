@@ -2,13 +2,13 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-04 22:15:52
-@LastEditTime: 2019-11-07 11:54:42
+@LastEditTime: 2019-11-08 17:22:29
 @Description:
 '''
 
 import os
 import json
-import strategy
+import Class.strategy
 
 
 def writeCardClassIndex(cardClassIndex):

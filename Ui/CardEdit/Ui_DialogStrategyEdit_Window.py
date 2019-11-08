@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 18:55:41
-@LastEditTime: 2019-11-08 17:04:00
+@LastEditTime: 2019-11-08 17:23:07
 @Description:
 '''
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 import sys
 
-from strategy import strategyNum2Name, strategyNum2Params
+from Class.strategy import strategyNum2Name, strategyNum2Params
 
 
 class DialogStrategyEdit_Window(QtWidgets.QDialog):

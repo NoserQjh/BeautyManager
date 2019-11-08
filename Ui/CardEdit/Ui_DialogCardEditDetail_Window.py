@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 18:55:41
-@LastEditTime: 2019-11-08 17:06:21
+@LastEditTime: 2019-11-08 17:49:05
 @Description:
 '''
 
@@ -11,10 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 import sys
 import json
+import copy
+import time
 
-from cardClass import writeCardClass
-from cardClass import readCardClassIndex, writeCardClassIndex
-from strategy import strategyNum2Name
+from Class.cardClass import writeCardClass, readCardClassIndex, writeCardClassIndex, cardClass2Dict
+from Class.strategy import strategyNum2Name
 
 from Ui.CardEdit.Ui_DialogStrategyEdit_Window import DialogStrategyEdit_Window
 
@@ -24,6 +25,7 @@ class DialogCardEditDetail_Window(QtWidgets.QDialog):
         QtWidgets.QDialog.__init__(self)
 
         self.cardClass = cardClass
+        self.cardClasBackup = copy.deepcopy(cardClass)
         self.fatherWindow = fatherWindow
 
         self.ui = Ui_DialogCardEditDetail()
@@ -45,7 +47,8 @@ class DialogCardEditDetail_Window(QtWidgets.QDialog):
             self.buttonEditStrategyClicked)
         self.ui.pushButton_StrategyDelete.clicked.connect(
             self.buttonDeleteStrategyClicked)
-        self.ui.tableView_cardStrategy.doubleClicked.connect(self.buttonEditStrategyClicked)
+        self.ui.tableView_cardStrategy.doubleClicked.connect(
+            self.buttonEditStrategyClicked)
 
     def setTableView(self):
         strategies = self.cardClass.cardClassStrategies
@@ -74,14 +77,14 @@ class DialogCardEditDetail_Window(QtWidgets.QDialog):
             QtWidgets.QAbstractItemView.NoEditTriggers)
 
     def buttonAddStrategyClicked(self):
-        self.dialogStrategyEdit = DialogStrategyEdit_Window(self,
-            self.cardClass.cardClassStrategies, -1)
+        self.dialogStrategyEdit = DialogStrategyEdit_Window(
+            self, self.cardClass.cardClassStrategies, -1)
         self.dialogStrategyEdit.show()
 
     def buttonEditStrategyClicked(self):
         selectStrategy = self.ui.tableView_cardStrategy.currentIndex().row()
-        self.dialogStrategyEdit = DialogStrategyEdit_Window(self,
-            self.cardClass.cardClassStrategies, selectStrategy)
+        self.dialogStrategyEdit = DialogStrategyEdit_Window(
+            self, self.cardClass.cardClassStrategies, selectStrategy)
         self.dialogStrategyEdit.show()
 
     def buttonDeleteStrategyClicked(self):
@@ -93,10 +96,29 @@ class DialogCardEditDetail_Window(QtWidgets.QDialog):
         self.cardClass.cardClassName = self.ui.lineEdit_cardName.text()
         self.cardClass.cardClassDescription = self.ui.textEdit_cardDescription.toPlainText(
         )
-        writeCardClass(self.cardClass)
-        index = readCardClassIndex()
-        index[str(
-            self.cardClass.cardClassNum)] = self.cardClass.cardClassDescription
-        writeCardClassIndex(index)
+
+        changed = False
+        if self.cardClasBackup.cardClassName != self.cardClass.cardClassName:
+            changed = True
+        if self.cardClasBackup.cardClassDescription != self.cardClass.cardClassDescription:
+            changed = True
+        if self.cardClasBackup.cardClassStrategies != self.cardClass.cardClassStrategies:
+            changed = True
+        if changed:
+            writeCardClass(self.cardClass)
+            index = readCardClassIndex()
+            index[str(self.cardClass.
+                      cardClassNum)] = self.cardClass.cardClassDescription
+            writeCardClassIndex(index)
+            log = {
+                'Type': 'CardEdit',
+                'Backup': cardClass2Dict(self.cardClasBackup),
+                'New': cardClass2Dict(self.cardClass),
+                'Time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            }
+            with open(
+                    './Logs/' + str(time.time()).replace('.', '') +
+                    '_CardEdit.json', 'w') as outfile:
+                json.dump(log, outfile)
         self.fatherWindow.setTableView()
         self.close()
