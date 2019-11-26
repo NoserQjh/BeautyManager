@@ -1,4 +1,5 @@
-/Data/CardClass/*
-/Data/Index/*
-/Data/Member/*
+/Data/CardClass/*.json
+/Data/Index/*.json
+/Data/Member/*.json
+#/Data/Product/*.json
 /Logs/*
