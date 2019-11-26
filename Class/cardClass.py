@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-04 22:15:52
-@LastEditTime: 2019-11-08 17:22:29
+@LastEditTime: 2019-11-26 16:20:12
 @Description:
 '''
 
@@ -28,7 +28,7 @@ def readCardClassIndex():
 def getNewCardClassNum():
     cardClassIndex = readCardClassIndex()
 
-    numList = []
+    numList = [-1]
     for carClassNum in cardClassIndex.keys():
         numList.append(int(carClassNum))
     return max(numList) + 1
@@ -124,4 +124,4 @@ def writeCardClass(cardClass):
 
 
 if __name__ == '__main__':
-    c = CardClass('2类卡', [])
+    cs = readCardClasses

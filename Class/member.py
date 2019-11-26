@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 17:42:39
-@LastEditTime: 2019-11-08 17:21:21
+@LastEditTime: 2019-11-26 15:54:25
 @Description:
 '''
 
@@ -26,7 +26,7 @@ def readMemberIndex():
 def getNewMemberNum():
     memberIndex = readMemberIndex()
 
-    numList = []
+    numList = [-1]
     for memberNum in memberIndex.keys():
         numList.append(int(memberNum))
     return max(numList) + 1

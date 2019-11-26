@@ -2,7 +2,7 @@
 @Author: NoserQJH
 @LastEditors: NoserQJH
 @Date: 2019-11-05 18:55:41
-@LastEditTime: 2019-11-08 17:23:07
+@LastEditTime: 2019-11-26 18:35:51
 @Description:
 '''
 
@@ -72,6 +72,7 @@ class DialogStrategyEdit_Window(QtWidgets.QDialog):
                     float(self.model.data(self.model.index(0, i))))
             except:
                 QtWidgets.QMessageBox.warning(self, '非法输入', '输入优惠参数不符合规则')
+                return
         strategyDescription = self.ui.plainTextEdit.toPlainText()
         if self.strategyIndex >= 0:
             self.strategies[self.strategyIndex] = {

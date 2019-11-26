@@ -55,7 +55,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="pushButtonProductEdit">
             <property name="text">
              <string>项目设置</string>
             </property>
